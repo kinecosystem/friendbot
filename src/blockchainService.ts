@@ -31,7 +31,7 @@ export class BlockchainService {
         });
     }
 
-    async whitelistTransaction(payload: WhitelistPayload): Promise<string> {
-        return await this.rootAccount.whitelistTransaction(payload);
+    whitelistTransaction(payload: WhitelistPayload): string {
+        return this.rootAccount.whitelistTransaction(payload);
     }
 }

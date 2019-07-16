@@ -20,7 +20,7 @@ export class Routes {
         await this.createOrFund(req, res, false);
     };
     public readonly whitelistHandler: express.RequestHandler = async (req: Request, res: Response) => {
-        await this.whitelist(req, res);
+        this.whitelist(req, res);
     };
 
     private async createOrFund(req: Request, res: Response, create: boolean) {
@@ -61,11 +61,11 @@ export class Routes {
         return amount;
     }
 
-    private async whitelist(req: Request, res: Response) {
+    private whitelist(req: Request, res: Response) {
         const envelope = req.body.envelop;
         const networkId = req.body.network_id;
 
-        const whitlistedTransaction = await this.blockchainService.whitelistTransaction({
+        const whitlistedTransaction = this.blockchainService.whitelistTransaction({
             networkId: networkId,
             envelope: envelope
         });
