@@ -1,4 +1,5 @@
 import { KinAccount } from "@kinecosystem/kin-sdk-node";
+import { WhitelistPayload } from "@kinecosystem/kin-sdk-node/scripts/src/types";
 
 export class BlockchainService {
 
@@ -28,5 +29,9 @@ export class BlockchainService {
             });
             return await this.rootAccount.submitTransaction(builder);
         });
+    }
+
+    async whitelistTransaction(payload: WhitelistPayload): Promise<string> {
+        return await this.rootAccount.whitelistTransaction(payload);
     }
 }
