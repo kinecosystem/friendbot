@@ -63,5 +63,6 @@ export class FriendBotApp {
     private createRoutes(app: express.Express) {
         app.get('/', this.routes!.createAccountHandler);
         app.get('/fund', this.routes!.fundAccountHandler);
+        app.post('/whitelist', this.routes!.whitelistHandler);
     }
 }

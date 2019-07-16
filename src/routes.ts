@@ -19,6 +19,9 @@ export class Routes {
     public readonly fundAccountHandler: express.RequestHandler = async (req: Request, res: Response) => {
         await this.createOrFund(req, res, false);
     };
+    public readonly whitelistHandler: express.RequestHandler = async (req: Request, res: Response) => {
+        this.whitelist(req, res);
+    };
 
     private async createOrFund(req: Request, res: Response, create: boolean) {
         const address = req.query.addr;
@@ -56,5 +59,17 @@ export class Routes {
             }
         }
         return amount;
+    }
+
+    private whitelist(req: Request, res: Response) {
+        const envelope = req.body.envelop;
+        const networkId = req.body.network_id;
+
+        const whitlistedTransaction = this.blockchainService.whitelistTransaction({
+            networkId: networkId,
+            envelope: envelope
+        });
+
+        res.status(200).send(whitlistedTransaction);
     }
 }
